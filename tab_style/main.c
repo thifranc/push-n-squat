@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 10:14:54 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/30 15:59:44 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/30 16:38:31 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int			**make_tab(int ac, char **av)
 	while (i < ac)
 	{
 		tmp = (int)atoll(av[i]);
+		if (tmp == STOP)
+			exiting("A nb is a STOP nb. Change the header file svp\n");
 		if (tmp < -2147483647 || tmp > 2147483648)
 			exiting("Error: Number overflow int magnitude\n");
 		if (!(a[i - 1] = (int*)malloc(sizeof(int))))
@@ -79,6 +81,8 @@ int			**make_tab(int ac, char **av)
 		*a[i - 1] = (int)tmp;
 		i++;
 	}
+	if (!(a[i - 1] = (int*)malloc(sizeof(int))))
+		return (0);
 	*a[i - 1] = STOP;//THIS ONE ISNT MALLOC MAYBE SEGFAULT WILL COME
 	return (a);
 }
@@ -91,7 +95,8 @@ int			main(int ac, char **av)
 	int		**b;
 	int		i;
 
-	a = make_tab(ac, av);
+	if (!(a = make_tab(ac, av)))
+		exiting("Couldn't create tab\n");
 	//faire un wild_cases correect svp
 	b = (int**)malloc(sizeof(int*) * ac);
 	i = 0;
