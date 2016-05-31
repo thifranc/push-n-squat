@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 10:14:54 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/30 16:38:31 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/31 12:26:27 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ int			main(int ac, char **av)
 {
 	int		**a;
 	int		**b;
+	int		**goal;
+	t_data	data;
 	int		i;
 
 	if (!(a = make_tab(ac, av)))
@@ -108,6 +110,12 @@ int			main(int ac, char **av)
 	}
 	double_check(a, ac - 1);
 	print_tab(a);
+	goal = make_goal(a, ac - 1);
+	data = count_gap(a, goal, ac -1);
+	printf("GAP IS EQUAL TO:%d\n", data.step);
+	dprintf(1, "goal coming\n");
+	print_tab(goal);
+	dprintf(1, "goal end\n");
 	rotate(a);
 	dprintf(1, "rotated\n");
 	print_tab(a);

@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 10:15:16 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/30 15:33:47 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/31 12:21:11 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@
 # include "libft/libft.h"
 
 # define STOP -666
+
+typedef struct	s_data
+{
+	int			misplaced;
+	int			step;
+}				t_data;
+
+void	mem_tab(int **src, int size);
+int		**make_goal(int **src, int size);
+t_data	count_gap(int **a, int **b, int size);
 
 void	print_tab(int **tab);
 int		tablen(int **tab);
