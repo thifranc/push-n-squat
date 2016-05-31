@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 10:14:54 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/31 12:26:27 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/31 12:41:53 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,24 +95,17 @@ int			main(int ac, char **av)
 	int		**b;
 	int		**goal;
 	t_data	data;
-	int		i;
 
 	if (!(a = make_tab(ac, av)))
 		exiting("Couldn't create tab\n");
 	//faire un wild_cases correect svp
 	b = (int**)malloc(sizeof(int*) * ac);
-	i = 0;
-	while (i < ac)
-	{
-		b[i] = malloc(sizeof(int));
-		*b[i] = STOP;
-		i++;
-	}
+	mem_tab(b, ac, STOP);
 	double_check(a, ac - 1);
 	print_tab(a);
 	goal = make_goal(a, ac - 1);
 	data = count_gap(a, goal, ac -1);
-	printf("GAP IS EQUAL TO:%d\n", data.step);
+	printf("GAP:%d, misplace:%d\n", data.step, data.misplaced);
 	dprintf(1, "goal coming\n");
 	print_tab(goal);
 	dprintf(1, "goal end\n");
@@ -120,7 +113,7 @@ int			main(int ac, char **av)
 	dprintf(1, "rotated\n");
 	print_tab(a);
 	dprintf(1, "rev_rotated\n");
-	rev_rotate(a, i - 2);
+	rev_rotate(a, ac - 2);
 	print_tab(a);
 	dprintf(1, "pushed on b\n");
 	push(a, b);

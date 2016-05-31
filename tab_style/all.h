@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 10:15:16 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/31 12:21:11 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/31 12:39:34 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct	s_data
 	int			step;
 }				t_data;
 
-void	mem_tab(int **src, int size);
+void	mem_tab(int **src, int size, int value);
 int		**make_goal(int **src, int size);
 t_data	count_gap(int **a, int **b, int size);
 
