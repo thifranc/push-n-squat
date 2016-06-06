@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 11:18:53 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/31 12:39:18 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/06 11:05:55 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_data	count_gap(int **a, int **b, int size)
 	data.misplaced = 0;
 	data.step = 0;
 	while (i < size)
-	{	
+	{
 		ct = 0;
 		while (*b[i] != *a[ct])
 			ct++;
@@ -72,6 +72,6 @@ int		**make_goal(int **src, int size)
 		back = *out[i];
 		i++;
 	}
-	*out[size] = STOP;
+	out[size] = NULL;
 	return (out);
 }

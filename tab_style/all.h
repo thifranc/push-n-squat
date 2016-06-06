@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 10:15:16 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/31 12:39:34 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/06 11:43:53 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # include <stdio.h>
 # include <unistd.h>
 # include "libft/libft.h"
-
-# define STOP -666
 
 typedef struct	s_data
 {
@@ -35,6 +33,6 @@ int		tablen(int **tab);
 
 void	swapp(int **tab, int a, int b);
 void	push(int **tab, int **b);
-void	rotate(int **tab);
+void	rotate(int **tab, int last);
 void	rev_rotate(int **tab, int last);
 #endif

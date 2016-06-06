@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 10:14:54 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/31 12:41:53 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/06 11:45:33 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,17 @@ int			**make_tab(int ac, char **av)
 	while (i < ac)
 	{
 		tmp = (int)atoll(av[i]);
-		if (tmp == STOP)
-			exiting("A nb is a STOP nb. Change the header file svp\n");
 		if (tmp < -2147483647 || tmp > 2147483648)
 			exiting("Error: Number overflow int magnitude\n");
 		if (!(a[i - 1] = (int*)malloc(sizeof(int))))
-			return (0);
+			return (NULL);
 		*a[i - 1] = (int)tmp;
 		i++;
 	}
 	if (!(a[i - 1] = (int*)malloc(sizeof(int))))
-		return (0);
-	*a[i - 1] = STOP;//THIS ONE ISNT MALLOC MAYBE SEGFAULT WILL COME
+		return (NULL);
+	a[i - 1] = NULL;
+	double_check(a, ac - 1);
 	return (a);
 }
 
@@ -98,27 +97,15 @@ int			main(int ac, char **av)
 
 	if (!(a = make_tab(ac, av)))
 		exiting("Couldn't create tab\n");
-	//faire un wild_cases correect svp
 	b = (int**)malloc(sizeof(int*) * ac);
-	mem_tab(b, ac, STOP);
-	double_check(a, ac - 1);
-	print_tab(a);
+	mem_tab(b, ac, 0);
 	goal = make_goal(a, ac - 1);
-	data = count_gap(a, goal, ac -1);
+	data = count_gap(a, goal, ac - 1);
+	print_tab(a);
+	rev_rotate(a, tablen(a));
+	print_tab(a);
+	rotate(a, tablen(a));
+	print_tab(a);
 	printf("GAP:%d, misplace:%d\n", data.step, data.misplaced);
-	dprintf(1, "goal coming\n");
-	print_tab(goal);
-	dprintf(1, "goal end\n");
-	rotate(a);
-	dprintf(1, "rotated\n");
-	print_tab(a);
-	dprintf(1, "rev_rotated\n");
-	rev_rotate(a, ac - 2);
-	print_tab(a);
-	dprintf(1, "pushed on b\n");
-	push(a, b);
-	print_tab(a);
-	dprintf(1, "a is up and b is down\n");
-	print_tab(b);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 10:14:32 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/31 12:35:44 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/06 11:44:13 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		tablen(int **tab)
 	int		i;
 
 	i = 0;
-	while (*tab[i] != STOP)
+	while (tab[i])
 		i++;
 	return (i);
 }
@@ -27,14 +27,20 @@ void	push(int **a, int **b)
 	if (!a[0])
 		return ;
 	if (tablen(b) == 0)
+	{
+		b[0] = b[1] - 1;
 		*b[0] = *a[0];
+		b[1] = NULL;
+	}
 	else
 	{
-		rev_rotate(b, tablen(b) + 1);
+		swapp(b, tablen(b) + 1, 0);//je mets un valeur = 0 en tete
+		swapp(b, tablen(b), tablen(b) + 1);//je decale mon NULL derriere last elem
 		*b[0] = *a[0];
-	}
-	*a[0] = STOP;
-	rotate(a);//attention p-e segfault rotate + 1 si un seul elem
+	}//attention cette technique n'est pas protegee si B est full (swap de 0 avec tablen(b) + 1 est indetermine car celui-ci ne sera pas init a 0)
+	*a[0] = 0;//prepare mon nouveau 0 en stock
+	rotate(a, tablen(a));//0 en stock juste avant NULL ptr
+	swapp(a, tablen(a), tablen(a - 1));//swap 0 et NULL
 }
 
 void	swapp(int **tab, int nb1, int nb2)
@@ -56,12 +62,12 @@ void	rev_rotate(int **tab, int last)
 	}
 }
 
-void	rotate(int **tab)
+void	rotate(int **tab, int last)
 {
 	int		i;
 
 	i = 0;
-	while (*tab[i + 1] != STOP)
+	while (last && i + 1 < last)//projet last = tablen(tab);
 	{
 		swapp(tab, i, i + 1);
 		i++;
