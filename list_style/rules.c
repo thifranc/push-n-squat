@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 16:32:52 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/12 10:09:12 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/06 14:24:48 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,38 @@ void	dellist(t_list **b)
 	}
 }
 
-void	ft_putstr_del(char *str)
+void	swapp(t_list **a)
 {
-	write(1, str, ft_strlen(str));
-	free(str);
+	t_list	*swapper;
+
+	swapper = (*a)->next;
+	(*a)->next = swapper->next;
+	(*a)->next->prev = (*a);
+	(*a)->prev->next = swapper;
+	swapper->prev = (*a)->prev;
+	(*a)->prev = swapper;
+	swapper->next = *a;
+	(*a) = swapper;//head over the new head
 }
 
-void	pa(t_list **a, t_list **b, char *out)
+void	rev_rotate(t_list **list)
+{
+	(*list) = (*list)->prev;
+}
+
+void	rotate(t_list **list)
+{
+	(*list) = (*list)->next;
+}
+
+void	push(t_list **a, t_list **b)
 {
 	t_list	*head;
 
+	//debug
+	if (!(*a))
+		dprintf(1, "program will segfault cause push been called with nothing tu push from\n");
+	//end of debug
 	head = (*a)->next;
 	if (*a == (*a)->next)
 		head = NULL;
@@ -57,13 +79,4 @@ void	pa(t_list **a, t_list **b, char *out)
 		(*b)->prev = *b;
 	}
 	*a = head;
-	if (head == NULL && out[1] == 'b')
-		out[2] = '\0';
-	ft_putstr_del(out);
-}
-
-void	rb(t_list **b)
-{
-	*b = (*b)->next;
-	write(1, "rb ", 3);
 }

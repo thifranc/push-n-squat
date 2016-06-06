@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 15:50:06 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/11 16:29:11 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/06 13:54:00 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ typedef struct		s_list
 }					t_list;
 
 void				dellist(t_list **a);
-void				min_in_first(t_list **b);
-void				rb(t_list **b);
 void				circle_list(t_list *list);
-void				print_list(t_list *list, int ct);
+void				print_list(t_list *list);
 void				add_node(t_list **list, int nbr);
-void				pa(t_list **a, t_list **b, char *out);
 
+void				rotate(t_list **list);
+void				push(t_list **a, t_list **b);
+void				rev_rotate(t_list **list);
+void				swapp(t_list **a);
 #endif

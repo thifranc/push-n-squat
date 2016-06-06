@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 14:08:34 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/11 17:11:55 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/06 14:25:30 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,29 +93,14 @@ t_list		*list_arg(int ac, char **av)
 
 int			main(int ac, char **av)
 {
-	int				first;
 	t_list			*a;
 	t_list			*b;
 
 	b = NULL;
 	a = list_arg(ac, av);
 	circle_list(a);
-	print_list(a, 1);
-	pa(&a, &b, ft_strdup("pa "));
-	while (a)
-	{
-		first = b->nbr;
-		while (b->next->nbr != first && a->nbr < b->nbr)
-			rb(&b);
-		if (b->next->nbr == first && a->nbr < b->nbr)
-			rb(&b);
-		pa(&a, &b, ft_strdup("pa "));
-		min_in_first(&b);
-	}
-	while (b)
-		pa(&b, &a, ft_strdup("pb "));
-	write(1, "\n", 1);
-	print_list(a, 1);
+	print_list(a);
+	print_list(b);
 	dellist(&a);
 	return (0);
 }
