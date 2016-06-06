@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 15:50:06 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/06 19:05:52 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/06 19:09:42 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ void				swapp(t_list **a);
 
 void				place_in_head(t_list **list, t_list *goal);
 int					nearest(t_list **list, t_list *goal);
+int					nearest2(t_list **list, t_list *one, t_list *two);
 t_list				*get_value(t_list **list, int value);
 #endif

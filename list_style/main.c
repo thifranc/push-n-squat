@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 14:08:34 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/06 19:04:32 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/06 19:23:29 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int			main(int ac, char **av)
 	a = list_arg(ac, av);
 	circle_list(a);
 	goal = make_goal(a);
-	print_list(a);
-	print_tab(goal, ac - 1);
+	printf("nearest is %d\n", nearest2(&a, get_value(&a, 8), get_value(&a, 8)));
 	dellist(&a);
 	return (0);
 }

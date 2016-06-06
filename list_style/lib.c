@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 15:13:31 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/06 16:08:50 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/06 19:11:01 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,9 @@ t_list	*get_value(t_list **list, int value)
 	//end debug
 	return (tmp);
 }
-/*
+
 int		nearest2(t_list **list, t_list *one, t_list *two)
 {
-	t_list	*tmp;
 	int		one_min;
 	int		two_min;
 
@@ -41,7 +40,6 @@ int		nearest2(t_list **list, t_list *one, t_list *two)
 	two_min = ft_abs(nearest(&(*list), two));
 	return (one_min <= two_min ? -1 : 1);
 }
-not tested yet*/
 
 int		nearest(t_list **list, t_list *goal)
 {
