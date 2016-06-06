@@ -6,11 +6,34 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 19:04:16 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/06 19:05:04 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/06 22:13:43 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "all.h"
+
+t_data	count_gap(t_list *a, int *goal, int size)
+{
+	t_data	data;
+	t_list	*tmp;
+	int		i;
+	int		ct;
+
+	i = 0;
+	data.gap = 0;
+	data.misplaced = 0;
+	tmp = a;
+	while (i < size)
+	{
+		ct = nearest(&tmp, get_value(&tmp, goal[i]));
+		if (ct)
+			data.misplaced++;
+		data.gap += ft_abs(ct);
+		tmp = tmp->next;
+		i++;
+	}
+	return (data);
+}
 
 int		get_min(t_list *list, int min, int size)
 {

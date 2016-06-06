@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 15:13:31 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/06 19:11:01 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/06 22:14:09 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int		nearest(t_list **list, t_list *goal)
 		tmp = tmp->prev;
 		rewind++;
 	}
-	printf("forward-%d vs rewind-%d\n", forward, rewind);
 	return (forward <= rewind ? forward : -rewind);
 }
 
