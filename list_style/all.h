@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 15:50:06 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/07 13:36:42 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/07 15:09:20 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ typedef struct		s_data
 	int				size;
 }					t_data;
 
-
 int					*make_goal(t_list *list);
 int					get_min(t_list *list, int min, int size);
 t_data				count_gap(t_list *list, int *goal, int size);
 
+t_list				*get_cible(t_list **a, t_list *elem, t_data data);
 
 void				double_check(t_list *a);
 t_list				*list_arg(int ac, char **av);
@@ -52,7 +52,6 @@ int					list_size(t_list *list);
 t_list				*list_min(t_list **list);
 t_list				*list_max(t_list **list);
 void				add_node(t_list **list, int nbr);
-
 
 void				print_list(t_list *list);
 void				print_tab(int *list, int size);

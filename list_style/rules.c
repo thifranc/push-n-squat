@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 16:32:52 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/06 14:24:48 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/07 13:48:45 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ void	push(t_list **a, t_list **b)
 {
 	t_list	*head;
 
-	//debug
+//debug
 	if (!(*a))
-		dprintf(1, "program will segfault cause push been called with nothing tu push from\n");
-	//end of debug
+		dprintf(1, "segfault cause push called with nothing to push  from\n");
+//end of debug
 	head = (*a)->next;
 	if (*a == (*a)->next)
 		head = NULL;
