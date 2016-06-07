@@ -6,11 +6,49 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 15:13:31 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/06 22:14:09 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/07 11:31:19 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "all.h"
+
+t_list	*list_min(t_list **list)
+{
+	t_list	*tmp;
+	t_list	*out;
+	int		size;
+
+	tmp = (*list)->next;
+	out = *list;
+	size = list_size(tmp) - 1;
+	while (size)
+	{
+		if (out->nbr > tmp->nbr)
+			out = tmp;
+		tmp = tmp->next;
+		size--;
+	}
+	return (out);
+}
+
+t_list	*list_max(t_list **list)
+{
+	t_list	*tmp;
+	t_list	*out;
+	int		size;
+
+	tmp = (*list)->next;
+	out = *list;
+	size = list_size(tmp) - 1;
+	while (size)
+	{
+		if (out->nbr < tmp->nbr)
+			out = tmp;
+		tmp = tmp->next;
+		size--;
+	}
+	return (out);
+}
 
 t_list	*get_value(t_list **list, int value)
 {
@@ -31,40 +69,7 @@ t_list	*get_value(t_list **list, int value)
 	return (tmp);
 }
 
-int		nearest2(t_list **list, t_list *one, t_list *two)
-{
-	int		one_min;
-	int		two_min;
-
-	one_min = ft_abs(nearest(&(*list), one));
-	two_min = ft_abs(nearest(&(*list), two));
-	return (one_min <= two_min ? -1 : 1);
-}
-
-int		nearest(t_list **list, t_list *goal)
-{
-	t_list	*tmp;
-	int		forward;
-	int		rewind;
-
-	forward = 0;
-	rewind = 0;
-	tmp = *list;
-	while (tmp != goal)
-	{
-		tmp = tmp->next;
-		forward++;
-	}
-	tmp = *list;
-	while (tmp != goal)
-	{
-		tmp = tmp->prev;
-		rewind++;
-	}
-	return (forward <= rewind ? forward : -rewind);
-}
-
-void	place_in_head(t_list **list, t_list *goal)
+void	put_in_head(t_list **list, t_list *goal)
 {
 	if (nearest(&(*list), goal) >= 0)
 	{

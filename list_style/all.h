@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 15:50:06 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/06 22:03:39 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/07 11:32:06 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ long long			ft_atoll(char *str);
 void				dellist(t_list **a);
 void				circle_list(t_list *list);
 int					list_size(t_list *list);
+t_list				*list_min(t_list **list);
+t_list				*list_max(t_list **list);
 void				add_node(t_list **list, int nbr);
 
 
@@ -57,8 +59,9 @@ void				push(t_list **a, t_list **b);
 void				rev_rotate(t_list **list);
 void				swapp(t_list **a);
 
-void				place_in_head(t_list **list, t_list *goal);
+void				put_in_head(t_list **list, t_list *goal);
 int					nearest(t_list **list, t_list *goal);
 int					nearest2(t_list **list, t_list *one, t_list *two);
+t_list				*nearest_b(t_list **list, int *goal, int pivot);
 t_list				*get_value(t_list **list, int value);
 #endif
