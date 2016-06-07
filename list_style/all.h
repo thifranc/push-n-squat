@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 15:50:06 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/07 15:09:20 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/07 21:02:22 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,14 @@ void				push(t_list **a, t_list **b);
 void				rev_rotate(t_list **list);
 void				swapp(t_list **a);
 
-void				put_in_head(t_list **list, t_list *goal);
 int					nearest(t_list **list, t_list *goal);
 int					nearest2(t_list **list, t_list *one, t_list *two);
+int					forw_or_rew(t_list *one, t_list *two);
 t_list				*nearest_b(t_list **list, int *goal, int pivot);
+
+int					is_full(t_list *b, int pivot);
+int					belongs_to(t_list *elem, int *goal, int pivot);
+
+void				put_in_head(t_list **list, t_list *goal);
 t_list				*get_value(t_list **list, int value);
 #endif
