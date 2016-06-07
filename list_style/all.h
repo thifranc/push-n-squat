@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 15:50:06 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/07 11:32:06 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/07 13:36:42 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ typedef struct		s_data
 {
 	int				misplaced;
 	int				gap;
+	int				*goal;
+	int				pivot;
+	int				size;
 }					t_data;
 
 
