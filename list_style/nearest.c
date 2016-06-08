@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 10:47:27 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/07 21:14:30 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/08 10:58:44 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int		nearest2(t_list **list, t_list *one, t_list *two)
 	int		one_min;
 	int		two_min;
 
-	one_min = ft_abs(nearest(&(*list), one));
-	two_min = ft_abs(nearest(&(*list), two));
+	one_min = ft_abs(forw_or_rew(*list, one));
+	two_min = ft_abs(forw_or_rew(*list, two));
 	return (one_min <= two_min ? -1 : 1);
 }
 
@@ -56,13 +56,13 @@ int		forw_or_rew(t_list *move, t_list *fixe)
 	forw = 0;
 	rew = 0;
 	tmp = move;
-	while (tmp->next != fixe)
+	while (tmp != fixe)
 	{
 		forw++;
 		tmp = tmp->next;
 	}
 	tmp = move;
-	while (tmp->next != fixe)
+	while (tmp != fixe)
 	{
 		rew++;
 		tmp = tmp->prev;
@@ -71,7 +71,7 @@ int		forw_or_rew(t_list *move, t_list *fixe)
 	return (forw <= rew ? forw : -rew);
 }
 
-int		nearest(t_list **list, t_list *goal)
+/*int		nearest(t_list **list, t_list *goal)//get rid of bearest in other calls
 {
 	t_list	*tmp;
 	int		forward;
@@ -92,4 +92,4 @@ int		nearest(t_list **list, t_list *goal)
 		rewind++;
 	}
 	return (forward <= rewind ? forward : -rewind);
-}
+}*/

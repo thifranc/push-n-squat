@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 19:04:16 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/07 14:50:50 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/08 10:59:29 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_data	count_gap(t_list *a, int *goal, int size)
 	tmp = a;
 	while (i < size)
 	{
-		ct = nearest(&tmp, get_value(&tmp, goal[i]));
+		ct = forw_or_rew(tmp, get_value(&tmp, goal[i]));
 		if (ct)
 			data.misplaced++;
 		data.gap += ft_abs(ct);

@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 15:13:31 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/07 14:10:49 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/08 10:57:34 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_list	*get_value(t_list **list, int value)
 
 void	put_in_head(t_list **list, t_list *goal)
 {
-	if (nearest(&(*list), goal) >= 0)
+	if (forw_or_rew(*list, goal) >= 0)
 	{
 		dprintf(1, "forward\n");
 		while ((*list) != goal)
