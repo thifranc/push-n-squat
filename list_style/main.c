@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 14:08:34 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/08 10:51:54 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/08 13:13:38 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ int		get_pivot(int gap, int misplaced, int size)
 	printf("gap = %d VS all = %d\n", gap, misplaced * (size / 2) / 2);
 	return (gap > (misplaced * (size / 2)) / 2 ? size / 2 : 0); 
 }
+
+int		pivot_move(t_list **a, t_list **b, int *goal, int pivot)
+{
+	if (!get_value(&(*a), goal[pivot]))//goal[pivot] is in B
+	{
+		put_in_head(&(*b), list_max(&(*b)));
+		push(&(*b), &(*a));
+	}
+	return (-1);
+}//do data.pivot += pivot_move;
 
 int			main(int ac, char **av)
 {
