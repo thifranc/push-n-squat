@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 10:47:27 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/11 11:03:49 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/11 12:38:17 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_list	*nearest_b(t_list **a, int *goal, int pivot)
 	forw = 0;
 	rew = 0;
 	tmp = *a;
-	dprintf(1, "dbar\n");
 	if (!pivot)//du coup y a pas de B possib
 		return (NULL);
 	while (tmp->nbr >= goal[pivot])
@@ -37,7 +36,6 @@ t_list	*nearest_b(t_list **a, int *goal, int pivot)
 		rew++;
 		tmp = tmp->prev;
 	}
-	dprintf(1, "tg\n");
 	return (rew < forw ? tmp : get_value(&(*a), back));
 }
 

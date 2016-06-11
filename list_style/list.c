@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 15:49:51 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/11 11:39:00 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/11 12:35:03 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,11 @@ void	print_list(t_list *list)
 	printf("list will be printed\n");
 	while (size)
 	{
-		printf("%d and str =%s\n", tmp->nbr, tmp->str);
+		printf("%d ", tmp->nbr);
 		tmp = tmp->next;
 		size--;
 	}
+	printf("\n");
 }
 
 void	print_tab(int *tab, int size)

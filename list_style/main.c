@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 14:08:34 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/11 11:35:06 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/11 12:36:12 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void		stack_sort(t_list **a, t_list **b, t_data data)
 	while ((cible = get_cible(&(*a), NULL, data)) != NULL
 			|| (data.pivot != 0 && !is_full(*b, data.pivot)))
 	{
+		print_list(*a);
+		print_list(*b);
 		dprintf(1, "lol1\n");
 		if (belongs_to(*a, data.goal, data.pivot) < 0)
 		{
@@ -99,10 +101,9 @@ int			main(int ac, char **av)
 	data.gap = new.gap;
 	data.misplaced = new.misplaced;
 	data.pivot = get_pivot(data.gap, data.misplaced, data.size);
-	print_list(a);
+	print_tab(data.goal, data.size);
 	stack_sort(&a, &b, data);
 	put_in_head(&a, list_min(&a));
-	print_list(a);
 	dellist(&a);
 	return (0);
 }

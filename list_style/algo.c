@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 10:10:08 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/11 11:37:26 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/11 13:34:22 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ t_list	*get_cible(t_list **a, t_list *elem, t_data data)
 	int		lol;
 	t_list	*tmp;
 
+	tmp = NULL;
 	size = data.size - 1;
-	dprintf(1, "erivibverwlhbverwlhcbilewrbilveriluviuewrv");
-	print_tab(data.goal, data.size);
 	if (!elem)//get_cible for A
 	{
+		dprintf(1, "elem is in A\n");
 		tmp = get_value(&(*a), data.goal[size]);
 		while (tmp->nbr != data.goal[size - 1])
 		{
@@ -53,12 +53,19 @@ t_list	*get_cible(t_list **a, t_list *elem, t_data data)
 	}
 	else
 	{
-		dprintf(1, "elem in B\n");
+		dprintf(1, "elem is in B\n");
 		lol = get_rank(data.goal, elem->nbr, data.size);
-		printf("rank = %d hence goal=>%d\n", lol, data.goal[lol]);
-		print_list(*a);
-		tmp = get_value(&(*a), data.goal[lol]);
-		dprintf(1, "elem in B\n");
+		dprintf(1, "is in B\n");
+		printf("%d=end of B and %d=cible of B\n", data.goal[data.pivot - 1], data.goal[lol - 1]);
+		while (!tmp)
+		{
+		lol ? (tmp = get_value(&(*a), data.goal[lol - 1])) : (tmp = get_value(&(*a), data.goal[data.pivot - 1]));
+		lol--;
+		}
+		dprintf(1, "B cible =>%d\n", tmp->nbr);
+		//pb ac get_value car B est NULL so far
+		//-1 car cible pr B est premier directement inferieur a notre val actuelle
+		//pour get_rank = 0, return goal[size];
 		return (tmp);
 	}
 	return (NULL);
