@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 15:50:06 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/11 09:51:19 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/11 11:22:27 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,5 @@ int					belongs_to(t_list *elem, int *goal, int pivot);
 
 void				put_in_head(t_list **list, t_list *goal);
 t_list				*get_value(t_list **list, int value);
+int					get_rank(int *tab, int value, int size);
 #endif

@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 14:08:34 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/11 10:57:06 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/11 11:35:06 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ int		get_rank(int *tab, int value, int size)
 	i = 0;
 	while (value != tab[i] && i < size)
 		i++;
+	//debug
 	if (i == size)
 		dprintf(1, "PROBLEME MAJEUR IN GET_RANK\n");
+	//end debug
 	return (i == size ? -1 : i);
 }
 
@@ -49,13 +51,18 @@ void		stack_sort(t_list **a, t_list **b, t_data data)
 	while ((cible = get_cible(&(*a), NULL, data)) != NULL
 			|| (data.pivot != 0 && !is_full(*b, data.pivot)))
 	{
+		dprintf(1, "lol1\n");
 		if (belongs_to(*a, data.goal, data.pivot) < 0)
 		{
-			put_in_head(&(*b), get_cible(&(*b), *a, data));
+		dprintf(1, "lol4\n");
+			put_in_head(&(*b), get_cible(&(*a), *a, data));
+		dprintf(1, "lol0\n");
 			push(&(*a), &(*b));
+		dprintf(1, "lol2\n");
 		}
 		else
 		{
+		dprintf(1, "lol5\n");
 			if (cible && nearest2(&(*a), nearest_b(&(*a), data.goal, data.pivot), cible) < 0)
 				put_in_head(&(*a), nearest_b(&(*a), data.goal, data.pivot));
 			else if (cible && nearest2(&(*a), nearest_b(&(*a), data.goal, data.pivot), cible) > 0)
@@ -66,6 +73,7 @@ void		stack_sort(t_list **a, t_list **b, t_data data)
 			}
 			else
 			{
+		dprintf(1, "lol6\n");
 				if (!data.pivot || is_full(*b, data.pivot))
 					return ;//sais pas si possible de rentrer la dedans qd mm
 				else

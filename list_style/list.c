@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 15:49:51 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/08 10:46:08 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/11 11:39:00 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,13 @@ void	print_tab(int *tab, int size)
 	int		i;
 
 	i = 0;
-	printf("tab will be printed\n");
+	dprintf(1, "tab will be printed\n");
 	while (i < size)
 	{
-		printf("%d ", tab[i]);
+		dprintf(1, "%d ", tab[i]);
 		i++;
 	}
-	printf("\n");
+	dprintf(1, "\n");
 }
 
 void	circle_list(t_list *list)

@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 10:10:08 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/11 09:59:55 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/11 11:37:26 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,12 @@ t_list	*cible_updated(t_list *cible, t_list *sup)
 t_list	*get_cible(t_list **a, t_list *elem, t_data data)
 {
 	int		size;
+	int		lol;
 	t_list	*tmp;
 
 	size = data.size - 1;
+	dprintf(1, "erivibverwlhbverwlhcbilewrbilveriluviuewrv");
+	print_tab(data.goal, data.size);
 	if (!elem)//get_cible for A
 	{
 		tmp = get_value(&(*a), data.goal[size]);
@@ -48,6 +51,15 @@ t_list	*get_cible(t_list **a, t_list *elem, t_data data)
 				return (NULL);//A is sorted
 		}
 	}
-	return (get_value(&(*a), data.goal// == valeur juste dessous elem ds goal
-				[ft_get_rank(data.goal, elem->nbr, data.size) - 1]));
+	else
+	{
+		dprintf(1, "elem in B\n");
+		lol = get_rank(data.goal, elem->nbr, data.size);
+		printf("rank = %d hence goal=>%d\n", lol, data.goal[lol]);
+		print_list(*a);
+		tmp = get_value(&(*a), data.goal[lol]);
+		dprintf(1, "elem in B\n");
+		return (tmp);
+	}
+	return (NULL);
 }
