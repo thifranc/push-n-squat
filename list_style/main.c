@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 14:08:34 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/08 13:13:38 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/11 10:57:06 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,57 @@ int		pivot_move(t_list **a, t_list **b, int *goal, int pivot)
 	return (-1);
 }//do data.pivot += pivot_move;
 
+int		get_rank(int *tab, int value, int size)
+{
+	int		i;
+
+	i = 0;
+	while (value != tab[i] && i < size)
+		i++;
+	if (i == size)
+		dprintf(1, "PROBLEME MAJEUR IN GET_RANK\n");
+	return (i == size ? -1 : i);
+}
+
+void		stack_sort(t_list **a, t_list **b, t_data data)
+{
+	t_list	*cible;
+
+	while ((cible = get_cible(&(*a), NULL, data)) != NULL
+			|| (data.pivot != 0 && !is_full(*b, data.pivot)))
+	{
+		if (belongs_to(*a, data.goal, data.pivot) < 0)
+		{
+			put_in_head(&(*b), get_cible(&(*b), *a, data));
+			push(&(*a), &(*b));
+		}
+		else
+		{
+			if (cible && nearest2(&(*a), nearest_b(&(*a), data.goal, data.pivot), cible) < 0)
+				put_in_head(&(*a), nearest_b(&(*a), data.goal, data.pivot));
+			else if (cible && nearest2(&(*a), nearest_b(&(*a), data.goal, data.pivot), cible) > 0)
+			{
+				put_in_head(&(*a), cible_updated(cible, get_value(&(*a),
+						data.goal[get_rank(data.goal, cible->nbr, data.size) + 1])));
+				swapp(&(*a));
+			}
+			else
+			{
+				if (!data.pivot || is_full(*b, data.pivot))
+					return ;//sais pas si possible de rentrer la dedans qd mm
+				else
+					data.pivot += pivot_move(&(*a), &(*b), data.goal, data.pivot);
+			}
+		}
+	}
+}
+
 int			main(int ac, char **av)
 {
 	t_list			*a;
 	t_list			*b;
 	t_data			data;
 	t_data			new;
-	int				way;
-	t_list			*tmp;
 
 	b = NULL;
 	a = list_arg(ac, av);
@@ -48,24 +91,10 @@ int			main(int ac, char **av)
 	data.gap = new.gap;
 	data.misplaced = new.misplaced;
 	data.pivot = get_pivot(data.gap, data.misplaced, data.size);
-	print_tab(data.goal, data.size);
-	printf("max step = %d && misplaced=%d\n", data.gap, data.misplaced);
-	printf("pivot = %d and rank is %d\n", data.goal[data.pivot], data.pivot);
-	tmp = get_cible(&a, NULL, data);
-	if (!tmp)
-		exiting("A is sorted\n");
-	printf("Oh no ! %d is not sorted !\n", tmp->nbr);
-	way = forw_or_rew(get_value(&a, 4), get_value(&a, 7));
-	printf("%d = way \n", way);
-	if (way >= 0)
-		printf("you ll go forw\n");
-	else
-		printf("you ll go rew\n");
-	way = forw_or_rew(a, get_value(&a, 4));
-	if (way >= 0)
-		printf("you ll go forw\n");
-	else
-		printf("you ll go rew\n");
+	print_list(a);
+	stack_sort(&a, &b, data);
+	put_in_head(&a, list_min(&a));
+	print_list(a);
 	dellist(&a);
 	return (0);
 }

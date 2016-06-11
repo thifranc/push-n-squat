@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 15:13:31 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/08 10:57:34 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/08 13:06:14 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ t_list	*get_value(t_list **list, int value)
 	}
 	//debug
 	if (!size)
+		//return (NULL);
 		exiting("probleme ds get_value avec la value envoyee\n");
 	//end debug
 	return (tmp);

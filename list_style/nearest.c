@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 10:47:27 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/08 10:58:44 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/11 10:53:45 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ t_list	*nearest_b(t_list **a, int *goal, int pivot)
 	forw = 0;
 	rew = 0;
 	tmp = *a;
+	dprintf(1, "dbar\n");
+	if (!pivot)//du coup y a pas de B possib
+		return (NULL);
 	while (tmp->nbr >= goal[pivot])
 	{
 		forw++;
@@ -34,6 +37,7 @@ t_list	*nearest_b(t_list **a, int *goal, int pivot)
 		rew++;
 		tmp = tmp->prev;
 	}
+	dprintf(1, "tg\n");
 	return (rew < forw ? tmp : get_value(&(*a), back));
 }
 //nearest b et cible == nearest2(nearest_b, cible)
@@ -42,6 +46,10 @@ int		nearest2(t_list **list, t_list *one, t_list *two)
 	int		one_min;
 	int		two_min;
 
+	if (!one)
+		return (1);
+	if (!two)
+		return (-1);
 	one_min = ft_abs(forw_or_rew(*list, one));
 	two_min = ft_abs(forw_or_rew(*list, two));
 	return (one_min <= two_min ? -1 : 1);
@@ -67,7 +75,6 @@ int		forw_or_rew(t_list *move, t_list *fixe)
 		rew++;
 		tmp = tmp->prev;
 	}
-	printf("forw = %d, rew = %d\n", forw, rew);
 	return (forw <= rew ? forw : -rew);
 }
 

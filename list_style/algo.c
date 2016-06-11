@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 10:10:08 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/07 21:25:59 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/11 09:59:55 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ t_list	*get_cible(t_list **a, t_list *elem, t_data data)
 	t_list	*tmp;
 
 	size = data.size - 1;
-	printf("%d=======segfault && goal end = %d\n", data.size, data.goal[size - 1]);
 	if (!elem)//get_cible for A
 	{
 		tmp = get_value(&(*a), data.goal[size]);

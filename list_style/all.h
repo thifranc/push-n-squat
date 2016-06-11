@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 15:50:06 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/07 21:02:22 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/06/11 09:51:19 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int					get_min(t_list *list, int min, int size);
 t_data				count_gap(t_list *list, int *goal, int size);
 
 t_list				*get_cible(t_list **a, t_list *elem, t_data data);
+t_list				*cible_updated(t_list *cible, t_list *sup);
 
 void				double_check(t_list *a);
 t_list				*list_arg(int ac, char **av);
