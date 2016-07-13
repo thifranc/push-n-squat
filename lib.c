@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 15:13:31 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/11 13:40:21 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/07/13 09:29:55 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,8 @@ t_list	*get_value(t_list **list, int value)
 
 void	put_in_head(t_list **list, t_list *goal)
 {
-	dprintf(1, "lol2\n");
 	if (!(*list))
 		return ;
-	dprintf(1, "lol2\n");
 	if (forw_or_rew(*list, goal) >= 0)
 	{
 		dprintf(1, "forward\n");
@@ -91,5 +89,4 @@ void	put_in_head(t_list **list, t_list *goal)
 		while ((*list) != goal)
 			rev_rotate(&(*list));
 	}
-	dprintf(1, "lol2\n");
 }

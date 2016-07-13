@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 10:10:08 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/11 13:34:22 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/07/13 10:00:10 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_list	*cible_updated(t_list *cible, t_list *sup)
 t_list	*get_cible(t_list **a, t_list *elem, t_data data)
 {
 	int		size;
-	int		lol;
+	int		rank;
 	t_list	*tmp;
 
 	tmp = NULL;
@@ -43,7 +43,7 @@ t_list	*get_cible(t_list **a, t_list *elem, t_data data)
 		{
 			tmp = tmp->prev;
 			if (tmp->nbr != data.goal[size - 1] &&
-				tmp->nbr >= data.goal[data.pivot])
+					tmp->nbr >= data.goal[data.pivot])
 				return (get_value(&(*a), data.goal[size - 1]));
 			if (tmp->nbr == data.goal[size - 1])
 				size--;
@@ -54,13 +54,12 @@ t_list	*get_cible(t_list **a, t_list *elem, t_data data)
 	else
 	{
 		dprintf(1, "elem is in B\n");
-		lol = get_rank(data.goal, elem->nbr, data.size);
-		dprintf(1, "is in B\n");
-		printf("%d=end of B and %d=cible of B\n", data.goal[data.pivot - 1], data.goal[lol - 1]);
+		rank = get_rank(data.goal, elem->nbr, data.size);
+		printf("%d=end of B and %d=cible of B\n", data.goal[data.pivot - 1], data.goal[rank - 1]);
 		while (!tmp)
 		{
-		lol ? (tmp = get_value(&(*a), data.goal[lol - 1])) : (tmp = get_value(&(*a), data.goal[data.pivot - 1]));
-		lol--;
+			rank ? (tmp = get_value(&(*a), data.goal[rank - 1])) : (tmp = get_value(&(*a), data.goal[data.pivot - 1]));
+			rank--;
 		}
 		dprintf(1, "B cible =>%d\n", tmp->nbr);
 		//pb ac get_value car B est NULL so far
