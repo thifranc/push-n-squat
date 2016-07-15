@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 14:08:34 by thifranc          #+#    #+#             */
-/*   Updated: 2016/07/13 10:00:44 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/07/15 11:07:20 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,25 +55,34 @@ void		stack_sort(t_list **a, t_list **b, t_data data)
 		print_list(*b);
 		if (belongs_to(*a, data.goal, data.pivot) < 0)
 		{
-			put_in_head(&(*b), get_cible(&(*a), *a, data));
+			dprintf(1, "elem is in B\n");
+			put_in_head(&(*b), get_cible(&(*b), *a, data));
 			push(&(*a), &(*b));
 		}
 		else
 		{
+			dprintf(1, "elem is in A\n");
 			if (cible && nearest2(&(*a), nearest_b(&(*a), data.goal, data.pivot), cible) < 0)
+			{
+				dprintf(1, "B is nearest, putting B elem in head\n");
 				put_in_head(&(*a), nearest_b(&(*a), data.goal, data.pivot));
+			}
 			else if (cible && nearest2(&(*a), nearest_b(&(*a), data.goal, data.pivot), cible) > 0)
 			{
+				dprintf(1, "A is nearest, want to sort A\n");
 				put_in_head(&(*a), cible_updated(cible, get_value(&(*a),
 						data.goal[get_rank(data.goal, cible->nbr, data.size) + 1])));
 				swapp(&(*a));
 			}
 			else
 			{
+				dprintf(1, "A is sorted\n");
 				if (!data.pivot || is_full(*b, data.pivot))
 					return ;//sais pas si possible de rentrer la dedans qd mm
 				else
+				{
 					data.pivot += pivot_move(&(*a), &(*b), data.goal, data.pivot);
+				}
 			}
 		}
 	}

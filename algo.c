@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 10:10:08 by thifranc          #+#    #+#             */
-/*   Updated: 2016/07/13 10:00:10 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/07/15 10:20:47 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ t_list	*get_cible(t_list **a, t_list *elem, t_data data)
 	size = data.size - 1;
 	if (!elem)//get_cible for A
 	{
-		dprintf(1, "elem is in A\n");
 		tmp = get_value(&(*a), data.goal[size]);
 		while (tmp->nbr != data.goal[size - 1])
 		{
@@ -53,19 +52,18 @@ t_list	*get_cible(t_list **a, t_list *elem, t_data data)
 	}
 	else
 	{
-		dprintf(1, "elem is in B\n");
-		rank = get_rank(data.goal, elem->nbr, data.size);
-		printf("%d=end of B and %d=cible of B\n", data.goal[data.pivot - 1], data.goal[rank - 1]);
+		rank = get_rank(data.goal, elem->nbr, data.size) - 1;
+		if (!(*a))
+			return (NULL);
 		while (!tmp)
 		{
-			rank ? (tmp = get_value(&(*a), data.goal[rank - 1])) : (tmp = get_value(&(*a), data.goal[data.pivot - 1]));
-			rank--;
+			if (rank <= 0)
+				return (list_max(&(*a)));
+			if ((tmp = get_value(&(*a), data.goal[rank])) != NULL)
+				return (tmp);
+			else
+				rank--;
 		}
-		dprintf(1, "B cible =>%d\n", tmp->nbr);
-		//pb ac get_value car B est NULL so far
-		//-1 car cible pr B est premier directement inferieur a notre val actuelle
-		//pour get_rank = 0, return goal[size];
-		return (tmp);
 	}
 	return (NULL);
 }

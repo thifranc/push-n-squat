@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 10:47:27 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/11 12:38:17 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/07/15 11:47:37 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,22 @@ t_list	*nearest_b(t_list **a, int *goal, int pivot)
 {//attention ne pas appeler si pivot = 0 => boucle infinie
 	int		forw;
 	int		rew;
+	int		size;
 	int		back;
 	t_list	*tmp;
 
 	forw = 0;
 	rew = 0;
 	tmp = *a;
-	if (!pivot)//du coup y a pas de B possib
-		return (NULL);
-	while (tmp->nbr >= goal[pivot])
+	size = list_size(*a);
+	while (size && tmp->nbr >= goal[pivot])
 	{
 		forw++;
 		tmp = tmp->next;
+		size--;
 	}
+	if (!size)
+		return (NULL);
 	back = tmp->nbr;
 	tmp = *a;
 	while (tmp->nbr >= goal[pivot])
