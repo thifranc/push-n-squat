@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 14:08:34 by thifranc          #+#    #+#             */
-/*   Updated: 2016/07/15 11:07:20 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/09 16:52:24 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		get_pivot(int gap, int misplaced, int size)
 
 int		pivot_move(t_list **a, t_list **b, int *goal, int pivot)
 {
+
 	if (!get_value(&(*a), goal[pivot]))//goal[pivot] is in B
 	{
 		put_in_head(&(*b), list_max(&(*b)));
@@ -78,7 +79,9 @@ void		stack_sort(t_list **a, t_list **b, t_data data)
 			{
 				dprintf(1, "A is sorted\n");
 				if (!data.pivot || is_full(*b, data.pivot))
+				{
 					return ;//sais pas si possible de rentrer la dedans qd mm
+				}
 				else
 				{
 					data.pivot += pivot_move(&(*a), &(*b), data.goal, data.pivot);
@@ -106,8 +109,13 @@ int			main(int ac, char **av)
 	data.pivot = get_pivot(data.gap, data.misplaced, data.size);
 	print_tab(data.goal, data.size);
 	stack_sort(&a, &b, data);
+	dprintf(1, "END OF PROG\n");
 	put_in_head(&a, list_min(&a));
+	if (list_max(&b))
+		put_in_head(&b, list_max(&b));
 	print_list(a);
+	if (list_max(&b))
+		print_list(b);
 	dellist(&a);
 	return (0);
 }

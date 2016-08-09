@@ -6,7 +6,7 @@
 #    By: thifranc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/04 19:24:34 by thifranc          #+#    #+#              #
-#    Updated: 2016/06/07 13:55:03 by thifranc         ###   ########.fr        #
+#    Updated: 2016/08/09 16:34:11 by thifranc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = push_swap
 
 INC = lib.h
 
-SRCS = list main rules lib goal wild_cases nearest algo
+SRCS = list main rules lib goal wild_cases nearest_new algo
 
 SRCS:= $(addsuffix .c, $(SRCS))
 OBJ = $(SRCS:%.c=%.o)

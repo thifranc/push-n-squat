@@ -1,4 +1,3 @@
-/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   lib.c                                              :+:      :+:    :+:   */
@@ -37,6 +36,8 @@ t_list	*list_max(t_list **list)
 	t_list	*out;
 	int		size;
 
+	if (!*list)
+		return (NULL);
 	tmp = (*list)->next;
 	out = *list;
 	size = list_size(tmp) - 1;

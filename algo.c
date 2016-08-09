@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 10:10:08 by thifranc          #+#    #+#             */
-/*   Updated: 2016/07/15 10:20:47 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/09 16:29:53 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		is_full(t_list *b, int pivot)
 {
-	return (list_size(b) == pivot ? 1 : 0);//attention peut etre pivot - 1
+	return (list_size(b) == pivot + 1 ? 1 : 0);//attention peut etre pivot - 1
 }
 
 int		belongs_to(t_list *elem, int *goal, int pivot)
