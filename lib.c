@@ -66,7 +66,7 @@ t_list	*get_value(t_list **list, int value)
 	//debug
 	if (!size)
 	{
-		dprintf(1, "keskispass\n");
+//		dprintf(1, "keskispass\n");
 		return (NULL);
 	}
 		//exiting("probleme ds get_value avec la value envoyee\n");
@@ -80,13 +80,13 @@ void	put_in_head(t_list **list, t_list *goal)
 		return ;
 	if (forw_or_rew(*list, goal) >= 0)
 	{
-		dprintf(1, "forward\n");
+//		dprintf(1, "forward\n");
 		while ((*list) != goal)
 			rotate(&(*list));
 	}
 	else
 	{
-		dprintf(1, "rewind\n");
+//		dprintf(1, "rewind\n");
 		while ((*list) != goal)
 			rev_rotate(&(*list));
 	}

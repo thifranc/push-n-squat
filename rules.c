@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 16:32:52 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/07 13:48:45 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/10 11:23:44 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,19 @@ void	swapp(t_list **a)
 	(*a)->prev = swapper;
 	swapper->next = *a;
 	(*a) = swapper;//head over the new head
+//	dprintf(1, "swapp\n");
 }
 
 void	rev_rotate(t_list **list)
 {
 	(*list) = (*list)->prev;
+//	dprintf(1, "rev_rot\n");
 }
 
 void	rotate(t_list **list)
 {
 	(*list) = (*list)->next;
+//	dprintf(1, "rot\n");
 }
 
 void	push(t_list **a, t_list **b)
@@ -79,4 +82,5 @@ void	push(t_list **a, t_list **b)
 		(*b)->prev = *b;
 	}
 	*a = head;
+//	dprintf(1, "push\n");
 }

@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 10:10:08 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/09 16:29:53 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/10 11:07:51 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_list	*cible_updated(t_list *cible, t_list *sup)
 t_list	*get_cible(t_list **a, t_list *elem, t_data data)
 {
 	int		size;
-	int		rank;
 	t_list	*tmp;
 
 	tmp = NULL;
@@ -52,18 +51,18 @@ t_list	*get_cible(t_list **a, t_list *elem, t_data data)
 	}
 	else
 	{
-		rank = get_rank(data.goal, elem->nbr, data.size) - 1;
 		if (!(*a))
 			return (NULL);
-		while (!tmp)
+		size = list_size(*a);
+		tmp = list_max(&(*a));
+		while (size)
 		{
-			if (rank <= 0)
-				return (list_max(&(*a)));
-			if ((tmp = get_value(&(*a), data.goal[rank])) != NULL)
+			if (elem->nbr > tmp->nbr)
 				return (tmp);
-			else
-				rank--;
+			tmp = tmp->next;
+			size--;
 		}
+		return (list_max(&(*a)));
 	}
 	return (NULL);
 }
