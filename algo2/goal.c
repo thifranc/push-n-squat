@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 19:04:16 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/14 09:10:43 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/14 09:39:44 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,20 @@ int		get_min(t_list *list, int min, int size)
 		list = list->next;
 	}
 	return (out);
+}
+
+int		get_rank(int *tab, int value, int size)
+{
+	int		i;
+
+	i = 0;
+	while (value != tab[i] && i < size)
+		i++;
+	//debug
+	if (i == size)
+		dprintf(1, "PROBLEME MAJEUR IN GET_RANK\n");
+	//end debug
+	return (i == size ? -1 : i);
 }
 
 int		*make_goal(t_list *list)

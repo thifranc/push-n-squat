@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 15:50:06 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/14 09:02:19 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/14 10:40:15 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ typedef struct		s_list
 
 typedef struct		s_pivot
 {
-	struct s_pivot	next;
-	struct s_pivot	prev;
+	struct s_pivot	*next;
+	struct s_pivot	*prev;
 	int				nbr;
-}
+}					t_pivot;
 
 typedef struct		s_data
 {
