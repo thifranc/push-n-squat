@@ -6,11 +6,23 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 14:08:34 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/14 17:57:10 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/14 18:56:37 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "all.h"
+
+void		wesh(t_list *list)
+{
+	t_list	*tmp;
+
+	tmp = list;
+	while (tmp)
+	{
+		printf("tmp is %d\n", tmp->nbr);
+		tmp = tmp->next;
+	}
+}
 
 t_list		*longest_row(t_list **list, t_data data)
 {
@@ -65,14 +77,14 @@ int			non_passed(t_list **list, t_data data, int beg, int end)
 {
 	if (!*list)
 		return (beg + 1);
-	while (beg != end && get_value_classic(&(*list), data.goal[beg]))
+	if (!get_value_classic(&(*list), data.goal[beg + 1]))
+		return (beg + 1);
+	while (beg != end && get_value_classic(&(*list), data.goal[beg + 1]))
 	{
-		dprintf(1, "lol\n");
 		if (beg == data.size)
-			beg = -1;
+			beg = 0;
 		else
 			beg++;
-		dprintf(1, "lol3\n");
 	}
 	return (beg + 1);
 }
@@ -82,10 +94,7 @@ int			list_count(t_list *list)
 	if (!list)
 		return (0);
 	else
-	{
-		dprintf(1, "VALUE OF LIST == %d\n", list->nbr);
 		return (1 + list_count(list->next));
-	}
 }
 
 int			get_gap(t_list **list, t_data data)
@@ -103,26 +112,13 @@ int			get_gap(t_list **list, t_data data)
 	i == data.size ? (back = -1) : (back = i - 1);
 	while (i != back)
 	{
-		dprintf(1, "i is %d and tmp vaue is %d\n", i, tmp->nbr);
 		if (!size)
 			return (list_count(misplaced));
-		if (i == data.size)
-			i = -1;
-		if (tmp->next->nbr == data.goal[i + 1])
-		{
-			dprintf(1, "lol2\n");
+		if (tmp->nbr == data.goal[i])
 			i = non_passed(&misplaced, data, i, back);
-			dprintf(1, "lol3\n");
-		}
 		else
-			add_node(&misplaced, tmp->next->nbr);
+			add_node(&misplaced, tmp->nbr);
 		size--;
-		tmp = tmp->next;
-	}
-	tmp = misplaced;
-	while (tmp)
-	{
-		printf("tmp is %d\n", tmp->nbr);
 		tmp = tmp->next;
 	}
 	return (list_count(misplaced));
