@@ -6,12 +6,11 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 14:08:34 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/14 11:22:22 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/14 17:57:10 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "all.h"
-
 
 t_list		*longest_row(t_list **list, t_data data)
 {
@@ -44,34 +43,89 @@ t_list		*longest_row(t_list **list, t_data data)
 	return (get_value(&(*list), data.goal[back[0]]));
 }
 
+t_list	*get_value_classic(t_list **list, int value)
+{
+	t_list	*tmp;
+
+	tmp = *list;
+	while (tmp && tmp->nbr != value)
+		tmp = tmp->next;
+	//debug
+	if (!tmp)
+	{
+//		dprintf(1, "keskispass\n");
+		return (NULL);
+	}
+		//exiting("probleme ds get_value avec la value envoyee\n");
+	//end debug
+	return (tmp);
+}
+
+int			non_passed(t_list **list, t_data data, int beg, int end)
+{
+	if (!*list)
+		return (beg + 1);
+	while (beg != end && get_value_classic(&(*list), data.goal[beg]))
+	{
+		dprintf(1, "lol\n");
+		if (beg == data.size)
+			beg = -1;
+		else
+			beg++;
+		dprintf(1, "lol3\n");
+	}
+	return (beg + 1);
+}
+
+int			list_count(t_list *list)
+{
+	if (!list)
+		return (0);
+	else
+	{
+		dprintf(1, "VALUE OF LIST == %d\n", list->nbr);
+		return (1 + list_count(list->next));
+	}
+}
+
 int			get_gap(t_list **list, t_data data)
 {
 	int		i;
 	int		size;
-	int		misplaced;
+	int		back;
+	t_list	*misplaced;
 	t_list	*tmp;
 
 	size = list_size(*list);
-	tmp = *list; // should use longest_row
-	i = 0;	//is related to longest_row
-	printf("i is %d and tmp is %d\n", i, tmp->nbr);
-	misplaced = 0;
-	while (i < data.size) //wrong
+	tmp = longest_row(&(*list), data);
+	i = get_rank(data.goal, tmp->nbr, data.size);
+	misplaced = NULL;
+	i == data.size ? (back = -1) : (back = i - 1);
+	while (i != back)
 	{
-		while (size && tmp->next->nbr != data.goal[i + 1])
-		{
-			printf("YES i is %d and tmp is %d\n", i, tmp->nbr);
-			tmp = tmp->next;
-			size--;
-			misplaced++;
-			//i++;
-		}
+		dprintf(1, "i is %d and tmp vaue is %d\n", i, tmp->nbr);
 		if (!size)
-			return (misplaced);
+			return (list_count(misplaced));
+		if (i == data.size)
+			i = -1;
+		if (tmp->next->nbr == data.goal[i + 1])
+		{
+			dprintf(1, "lol2\n");
+			i = non_passed(&misplaced, data, i, back);
+			dprintf(1, "lol3\n");
+		}
+		else
+			add_node(&misplaced, tmp->next->nbr);
+		size--;
 		tmp = tmp->next;
-		i++;
 	}
-	return (misplaced);
+	tmp = misplaced;
+	while (tmp)
+	{
+		printf("tmp is %d\n", tmp->nbr);
+		tmp = tmp->next;
+	}
+	return (list_count(misplaced));
 }
 
 /*
