@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 15:50:06 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/14 10:40:15 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/14 20:37:03 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct		s_data
 	int				*goal;
 	int				size;
 }					t_data;
+
+t_list				*get_pivot(t_data data, t_list *list, int count);
 
 int					*make_goal(t_list *list);
 int					get_min(t_list *list, int min, int size);

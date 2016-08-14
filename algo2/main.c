@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 14:08:34 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/14 18:56:37 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/14 21:00:36 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,12 @@ t_list	*get_value_classic(t_list **list, int value)
 	tmp = *list;
 	while (tmp && tmp->nbr != value)
 		tmp = tmp->next;
-	//debug
 	if (!tmp)
-	{
-//		dprintf(1, "keskispass\n");
 		return (NULL);
-	}
-		//exiting("probleme ds get_value avec la value envoyee\n");
-	//end debug
 	return (tmp);
 }
 
-int			non_passed(t_list **list, t_data data, int beg, int end)
+int			next_placed(t_list **list, t_data data, int beg, int end)
 {
 	if (!*list)
 		return (beg + 1);
@@ -115,7 +109,7 @@ int			get_gap(t_list **list, t_data data)
 		if (!size)
 			return (list_count(misplaced));
 		if (tmp->nbr == data.goal[i])
-			i = non_passed(&misplaced, data, i, back);
+			i = next_placed(&misplaced, data, i, back);
 		else
 			add_node(&misplaced, tmp->nbr);
 		size--;
@@ -160,6 +154,8 @@ int			main(int ac, char **av)
 	data.size = ac - 1;
 	printf("longest row begins at %d\n", longest_row(&a, data)->nbr);
 	printf("gap is %d\n", get_gap(&a, data));
+	b = get_pivot(data, a, 2);
+	wesh(b);
 	//stack_sort(&a, &b, data);
 	return (0);
 }
