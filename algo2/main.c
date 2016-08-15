@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 14:08:34 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/15 22:52:52 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/15 23:26:32 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int			get_gap(t_list **list, t_data data)
 	return (list_count(misplaced));
 }
 
-void		stack_sort(t_list **a, t_list **b, t_data data)
+int			stack_sort(t_list **a, t_list **b, t_data data)
 {
 	int		count;
 	int		gap;
@@ -141,13 +141,15 @@ void		stack_sort(t_list **a, t_list **b, t_data data)
 //			insertion_sort();
 	}
 	printf("number of steps == %d\n", step);
+	return (step);
 }
 
-int			main(int ac, char **av)
+int			mega_sort(int ac, char **av)
 {
 	t_list			*a;
 	t_list			*b;
 	t_data			data;
+	int				out;
 
 	if (ac == 1)
 		return (0);
@@ -158,7 +160,18 @@ int			main(int ac, char **av)
 	data.size = ac - 1;
 	printf("longest row begins at %d\n", longest_row(&a, data)->nbr);
 	printf("gap is %d\n", get_gap(&a, data));
-	stack_sort(&a, &b, data);
+	out = stack_sort(&a, &b, data);
 	print_list(a);
+	return (out);
+}
+
+int		main(int ac, char **av)
+{
+	int		quick;
+	int		thib;
+
+	quick = mega_sort(ac, av);
+	thib = thibault(ac, av);
+	printf("%d is quick and %d is thib\n", quick, thib);
 	return (0);
 }

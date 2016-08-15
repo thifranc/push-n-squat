@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 15:50:06 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/15 22:51:57 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/15 23:14:24 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,11 @@ typedef struct		s_data
 }					t_data;
 
 void		wesh(t_list *list);
+int			thibault(int ac, char **av);
+void		insert_sort(t_list **a, t_list **b, t_data data, int *count);
 
 t_list				*get_pivot(t_data data, t_list *list, int count);
+int					get_pivot2(int gap, int misplaced, int size);
 int					quick_sort(t_list **a, t_list **b, t_data data, int count);
 
 int					*make_goal(t_list *list);
