@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 15:50:06 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/14 20:37:03 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/15 08:54:18 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ typedef struct		s_data
 }					t_data;
 
 t_list				*get_pivot(t_data data, t_list *list, int count);
+void	quick_sort(t_list **a, t_list **b, t_data data, int count);
+void	unload(t_list **a, t_list *stop, t_list **b, int pivot_ahead);
+t_list	*hay_in_list(t_list **list, int value, int inf);
+void	load(t_list **a, t_list *stop, t_list **b, int pivot_ahead);
 
 int					*make_goal(t_list *list);
 int					get_min(t_list *list, int min, int size);

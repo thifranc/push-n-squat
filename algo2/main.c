@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 14:08:34 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/14 21:00:36 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/15 09:17:00 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,8 +154,9 @@ int			main(int ac, char **av)
 	data.size = ac - 1;
 	printf("longest row begins at %d\n", longest_row(&a, data)->nbr);
 	printf("gap is %d\n", get_gap(&a, data));
-	b = get_pivot(data, a, 2);
-	wesh(b);
+	quick_sort(&a, &b, data, 1);
+	print_list(a);
+	print_list(b);
 	//stack_sort(&a, &b, data);
 	return (0);
 }
