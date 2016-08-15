@@ -6,11 +6,23 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 14:08:34 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/15 12:16:40 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/15 21:23:08 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "all.h"
+
+t_list	*get_value_classic(t_list **list, int value)
+{
+	t_list	*tmp;
+
+	tmp = *list;
+	while (tmp && tmp->nbr != value)
+		tmp = tmp->next;
+	if (!tmp)
+		return (NULL);
+	return (tmp);
+}
 
 void		wesh(t_list *list)
 {
@@ -55,18 +67,6 @@ t_list		*longest_row(t_list **list, t_data data)
 		i++;
 	}
 	return (get_value(&(*list), data.goal[back[0]]));
-}
-
-t_list	*get_value_classic(t_list **list, int value)
-{
-	t_list	*tmp;
-
-	tmp = *list;
-	while (tmp && tmp->nbr != value)
-		tmp = tmp->next;
-	if (!tmp)
-		return (NULL);
-	return (tmp);
 }
 
 int			next_placed(t_list **list, t_data data, int beg, int end)
@@ -129,19 +129,15 @@ void		stack_sort(t_list **a, t_list **b, t_data data)
 	gap = get_gap(&(*a), data);
 	while (gap)
 	{
-		if (gap > list_size(*a) / 10)
-		{
+		printf("gap is %d when count is %d\n", gap, count);
+		//if (gap > list_size(*a) / 10 && ft_power(2, count) < list_size(*a))
+		//{
 			quick_sort(&(*a), &(*b), data, count);
 			count++;
-		}
-		else
-		{
-			gap = 0;
-		}
+			gap = get_gap(&(*a), data);
+		//}
 //			insertion_sort();
-		gap = get_gap(&(*a), data);
 	}
-	dprintf(1, "rounds = %d\n", count);
 }
 
 int			main(int ac, char **av)
@@ -161,7 +157,5 @@ int			main(int ac, char **av)
 	printf("gap is %d\n", get_gap(&a, data));
 	stack_sort(&a, &b, data);
 	print_list(a);
-	print_list(b);
-	//stack_sort(&a, &b, data);
 	return (0);
 }

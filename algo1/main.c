@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 14:08:34 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/10 11:28:13 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/15 21:18:49 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,12 @@ int			main(int ac, char **av)
 	dprintf(1, "END OF PROG\n");
 	put_in_head(&a, list_min(&a));
 	if (list_max(&b))
+	{
 		put_in_head(&b, list_max(&b));
+		while (b)
+			push(&b, &a);
+	}
 	print_list(a);
-	if (list_max(&b))
-		print_list(b);
 	dellist(&a);
 	return (0);
 }
