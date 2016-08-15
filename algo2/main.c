@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 14:08:34 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/15 21:23:08 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/15 22:52:52 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,20 +124,23 @@ void		stack_sort(t_list **a, t_list **b, t_data data)
 {
 	int		count;
 	int		gap;
+	int		step;
 
 	count = 1;
+	step = 0;
 	gap = get_gap(&(*a), data);
 	while (gap)
 	{
 		printf("gap is %d when count is %d\n", gap, count);
 		//if (gap > list_size(*a) / 10 && ft_power(2, count) < list_size(*a))
 		//{
-			quick_sort(&(*a), &(*b), data, count);
+			step += quick_sort(&(*a), &(*b), data, count);
 			count++;
 			gap = get_gap(&(*a), data);
 		//}
 //			insertion_sort();
 	}
+	printf("number of steps == %d\n", step);
 }
 
 int			main(int ac, char **av)

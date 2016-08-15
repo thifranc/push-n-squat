@@ -6,7 +6,7 @@
 /*   By: thifranc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 20:20:58 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/15 20:01:39 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/15 22:51:48 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,23 @@ int		next_stop(t_list *a, int pivot, int end)
 		return (pivot);
 }
 
-void	quick_sort(t_list **a, t_list **b, t_data data, int count)
+int		quick_sort(t_list **a, t_list **b, t_data data, int count)
 {
 	t_list	*tmp;
 	int		next;
+	int		step;
 
+	step = 0;
 	tmp = get_pivot(data, *a, count);
-	put_in_head(&(*a), get_value(&(*a), tmp->nbr));
+	put_in_head(&(*a), get_value(&(*a), tmp->nbr), &step);
 //	wesh(tmp);
-	while (tmp && tmp->next)//a faire encore une fois pour le last time
+	while (tmp && tmp->next)
 	{
 		next = next_stop(*a, tmp->next->nbr, tmp->next->next->nbr);
 		while ((*a)->nbr != next)
 		{
 			if ((*a)->nbr >= tmp->next->nbr)
-				push(&(*a), &(*b));
+				push(&(*a), &(*b), &step);
 			else
 				*a = (*a)->next;
 		}
@@ -68,14 +70,15 @@ void	quick_sort(t_list **a, t_list **b, t_data data, int count)
 		{
 			*a = (*a)->next;
 			while (*b)
-				push(&(*b), &(*a));
+				push(&(*b), &(*a), &step);
 		}
 		else if (*b)
 		{
-			put_in_head(&(*b), get_value(&(*b), tmp->next->nbr)->next);
+			put_in_head(&(*b), get_value(&(*b), tmp->next->nbr)->next, &step);
 			while (*b)
-				push(&(*b), &(*a));
+				push(&(*b), &(*a), &step);
 		}
 		tmp = tmp->next->next;
 	}
+	return (step);
 }

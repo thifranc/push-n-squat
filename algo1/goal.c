@@ -6,11 +6,25 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 19:04:16 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/08 10:59:29 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/15 22:26:54 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "all.h"
+
+int		get_rank(int *tab, int value, int size)
+{
+	int		i;
+
+	i = 0;
+	while (value != tab[i] && i < size)
+		i++;
+	//debug
+	if (i == size)
+		dprintf(1, "PROBLEME MAJEUR IN GET_RANK\n");
+	//end debug
+	return (i == size ? -1 : i);
+}
 
 t_data	count_gap(t_list *a, int *goal, int size)
 {

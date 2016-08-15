@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 15:50:06 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/15 12:02:40 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/15 22:51:57 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct		s_pivot
 typedef struct		s_data
 {
 	int				gap;
+	int				pivot;
+	int				misplaced;
 	int				*goal;
 	int				size;
 }					t_data;
@@ -44,7 +46,7 @@ typedef struct		s_data
 void		wesh(t_list *list);
 
 t_list				*get_pivot(t_data data, t_list *list, int count);
-void				quick_sort(t_list **a, t_list **b, t_data data, int count);
+int					quick_sort(t_list **a, t_list **b, t_data data, int count);
 
 int					*make_goal(t_list *list);
 int					get_min(t_list *list, int min, int size);
@@ -67,10 +69,10 @@ void				add_node(t_list **list, int nbr);
 void				print_list(t_list *list);
 void				print_tab(int *list, int size);
 
-void				rotate(t_list **list);
-void				push(t_list **a, t_list **b);
-void				rev_rotate(t_list **list);
-void				swapp(t_list **a);
+void				rotate(t_list **list, int *count);
+void				push(t_list **a, t_list **b, int *count);
+void				rev_rotate(t_list **list, int *count);
+void				swapp(t_list **a, int *count);
 
 int					nearest(t_list **list, t_list *goal);
 int					nearest2(t_list **list, t_list *one, t_list *two);
@@ -80,7 +82,7 @@ t_list				*nearest_b(t_list **list, int *goal, int pivot);
 int					is_full(t_list *b, int pivot);
 int					belongs_to(t_list *elem, int *goal, int pivot);
 
-void				put_in_head(t_list **list, t_list *goal);
+void				put_in_head(t_list **list, t_list *goal, int *count);
 t_list				*get_value(t_list **list, int value);
 int					get_rank(int *tab, int value, int size);
 #endif

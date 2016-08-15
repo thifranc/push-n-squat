@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 14:08:34 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/15 21:55:57 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/15 22:27:17 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,6 @@ int		pivot_move(t_list **a, t_list **b, int *goal, int pivot, int *count)
 	}
 	return (-1);
 }//do data.pivot += pivot_move;
-
-int		get_rank(int *tab, int value, int size)
-{
-	int		i;
-
-	i = 0;
-	while (value != tab[i] && i < size)
-		i++;
-	//debug
-	if (i == size)
-		dprintf(1, "PROBLEME MAJEUR IN GET_RANK\n");
-	//end debug
-	return (i == size ? -1 : i);
-}
 
 void		stack_sort(t_list **a, t_list **b, t_data data, int *count)
 {
