@@ -74,7 +74,7 @@ t_list	*get_value(t_list **list, int value)
 	return (tmp);
 }
 
-void	put_in_head(t_list **list, t_list *goal)
+void	put_in_head(t_list **list, t_list *goal, int *count)
 {
 	if (!(*list))
 		return ;
@@ -82,12 +82,12 @@ void	put_in_head(t_list **list, t_list *goal)
 	{
 //		dprintf(1, "forward\n");
 		while ((*list) != goal)
-			rotate(&(*list));
+			rotate(&(*list), count);
 	}
 	else
 	{
 //		dprintf(1, "rewind\n");
 		while ((*list) != goal)
-			rev_rotate(&(*list));
+			rev_rotate(&(*list), count);
 	}
 }

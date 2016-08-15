@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 15:50:06 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/11 11:22:27 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/15 21:51:28 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ void				add_node(t_list **list, int nbr);
 void				print_list(t_list *list);
 void				print_tab(int *list, int size);
 
-void				rotate(t_list **list);
-void				push(t_list **a, t_list **b);
-void				rev_rotate(t_list **list);
-void				swapp(t_list **a);
+void				rotate(t_list **list, int *count);
+void				push(t_list **a, t_list **b, int *count);
+void				rev_rotate(t_list **list, int *count);
+void				swapp(t_list **a, int *count);
 
 int					nearest(t_list **list, t_list *goal);
 int					nearest2(t_list **list, t_list *one, t_list *two);
@@ -70,7 +70,7 @@ t_list				*nearest_b(t_list **list, int *goal, int pivot);
 int					is_full(t_list *b, int pivot);
 int					belongs_to(t_list *elem, int *goal, int pivot);
 
-void				put_in_head(t_list **list, t_list *goal);
+void				put_in_head(t_list **list, t_list *goal, int *count);
 t_list				*get_value(t_list **list, int value);
 int					get_rank(int *tab, int value, int size);
 #endif
