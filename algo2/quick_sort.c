@@ -6,7 +6,7 @@
 /*   By: thifranc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 20:20:58 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/15 12:02:13 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/15 12:13:41 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,8 @@ void	quick_sort(t_list **a, t_list **b, t_data data, int count)
 
 	tmp = get_pivot(data, *a, count);
 	put_in_head(&(*a), get_value(&(*a), tmp->nbr));
-	wesh(tmp);
 	while (tmp && tmp->next)//a faire encore une fois pour le last time
 	{
-		print_list(*a);
 		next = next_stop(*a, tmp->next->nbr, tmp->next->next->nbr);
 		while ((*a)->nbr != next)
 		{
@@ -73,7 +71,6 @@ void	quick_sort(t_list **a, t_list **b, t_data data, int count)
 		}
 		else if (*b)
 		{
-			print_list(*b);
 			put_in_head(&(*b), get_value(&(*b), tmp->next->nbr)->next);
 			while (*b)
 				push(&(*b), &(*a));

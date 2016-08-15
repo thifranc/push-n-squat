@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 14:08:34 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/15 09:48:57 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/15 12:16:40 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,26 +120,29 @@ int			get_gap(t_list **list, t_data data)
 	return (list_count(misplaced));
 }
 
-/*
 void		stack_sort(t_list **a, t_list **b, t_data data)
 {
 	int		count;
+	int		gap;
 
-	count = 0;
-	get_gap();
+	count = 1;
+	gap = get_gap(&(*a), data);
 	while (gap)
 	{
-		if (gap > HUGE)
+		if (gap > list_size(*a) / 10)
 		{
-			quick_sort(count);
+			quick_sort(&(*a), &(*b), data, count);
 			count++;
 		}
 		else
-			insertion_sort();
-		get_gap();
+		{
+			gap = 0;
+		}
+//			insertion_sort();
+		gap = get_gap(&(*a), data);
 	}
+	dprintf(1, "rounds = %d\n", count);
 }
-*/
 
 int			main(int ac, char **av)
 {
@@ -156,7 +159,7 @@ int			main(int ac, char **av)
 	data.size = ac - 1;
 	printf("longest row begins at %d\n", longest_row(&a, data)->nbr);
 	printf("gap is %d\n", get_gap(&a, data));
-	quick_sort(&a, &b, data, 1);
+	stack_sort(&a, &b, data);
 	print_list(a);
 	print_list(b);
 	//stack_sort(&a, &b, data);
