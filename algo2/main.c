@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 14:08:34 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/15 09:17:00 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/15 09:48:57 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ void		wesh(t_list *list)
 	t_list	*tmp;
 
 	tmp = list;
+	dprintf(1, "LIST PRINT IS ONl\n");
 	while (tmp)
 	{
-		printf("tmp is %d\n", tmp->nbr);
+		dprintf(1, "tmp is %d\n", tmp->nbr);
 		tmp = tmp->next;
 	}
+	dprintf(1, "LIST PRINT IS OFF\n");
 }
 
 t_list		*longest_row(t_list **list, t_data data)
