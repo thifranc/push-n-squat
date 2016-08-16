@@ -6,7 +6,7 @@
 /*   By: thifranc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 20:20:58 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/15 22:51:48 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/16 09:41:06 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,22 +61,32 @@ int		quick_sort(t_list **a, t_list **b, t_data data, int count)
 		next = next_stop(*a, tmp->next->nbr, tmp->next->next->nbr);
 		while ((*a)->nbr != next)
 		{
+		//	dprintf(1, "elem is %d and pivot si %d and end is at %d\n", (*a)->nbr, tmp->next->nbr, next);
 			if ((*a)->nbr >= tmp->next->nbr)
+			{
 				push(&(*a), &(*b), &step);
+				dprintf(1, "push from a to b\n");
+			}
 			else
-				*a = (*a)->next;
+				rotate(&(*a), &step);
 		}
 		if ((*a)->nbr == tmp->next->nbr)
 		{
-			*a = (*a)->next;
+			rotate(&(*a), &step);
 			while (*b)
+			{
+				dprintf(1, "push from b to a\n");
 				push(&(*b), &(*a), &step);
+			}
 		}
 		else if (*b)
 		{
 			put_in_head(&(*b), get_value(&(*b), tmp->next->nbr)->next, &step);
 			while (*b)
+			{
+				dprintf(1, "push from b to a\n");
 				push(&(*b), &(*a), &step);
+			}
 		}
 		tmp = tmp->next->next;
 	}

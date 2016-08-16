@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 16:32:52 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/15 21:50:38 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/16 09:27:25 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,6 @@ void	push(t_list **a, t_list **b, int *count)
 		(*b)->prev = *b;
 	}
 	*a = head;
-	dprintf(1, "push\n");
+//	dprintf(1, "push\n");
 	(*count)++;
 }
