@@ -6,7 +6,7 @@
 /*   By: thifranc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 20:20:58 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/16 09:41:06 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/16 11:37:06 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int		quick_sort(t_list **a, t_list **b, t_data data, int count)
 	step = 0;
 	tmp = get_pivot(data, *a, count);
 	put_in_head(&(*a), get_value(&(*a), tmp->nbr), &step);
-//	wesh(tmp);
 	while (tmp && tmp->next)
 	{
 		next = next_stop(*a, tmp->next->nbr, tmp->next->next->nbr);
@@ -65,7 +64,7 @@ int		quick_sort(t_list **a, t_list **b, t_data data, int count)
 			if ((*a)->nbr >= tmp->next->nbr)
 			{
 				push(&(*a), &(*b), &step);
-				dprintf(1, "push from a to b\n");
+//				dprintf(1, "push from a to b\n");
 			}
 			else
 				rotate(&(*a), &step);
@@ -75,7 +74,7 @@ int		quick_sort(t_list **a, t_list **b, t_data data, int count)
 			rotate(&(*a), &step);
 			while (*b)
 			{
-				dprintf(1, "push from b to a\n");
+//				dprintf(1, "push from b to a\n");
 				push(&(*b), &(*a), &step);
 			}
 		}
@@ -84,7 +83,7 @@ int		quick_sort(t_list **a, t_list **b, t_data data, int count)
 			put_in_head(&(*b), get_value(&(*b), tmp->next->nbr)->next, &step);
 			while (*b)
 			{
-				dprintf(1, "push from b to a\n");
+//				dprintf(1, "push from b to a\n");
 				push(&(*b), &(*a), &step);
 			}
 		}

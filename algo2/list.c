@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 15:49:51 by thifranc          #+#    #+#             */
-/*   Updated: 2016/06/11 12:35:03 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/16 11:15:14 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,21 @@ void	circle_list(t_list *list)
 		tmp = tmp->next;
 	tmp->next = list;
 	list->prev = tmp;
+}
+
+t_list	*copy_list(t_list *a)
+{
+	t_list	*out;
+	int		size;
+
+	size = list_size(a);
+	out = NULL;
+	while (size)
+	{
+		add_node(&out, a->nbr);
+		size--;
+		a = a->next;
+	}
+	circle_list(out);
+	return (out);
 }

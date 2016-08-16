@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 14:08:34 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/16 09:35:42 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/16 11:35:45 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,25 +120,18 @@ int			get_gap(t_list **list, t_data data)
 	return (list_count(misplaced));
 }
 
-int			stack_sort(t_list **a, t_list **b, t_data data)
+int			stack_sort(t_list **a, t_list **b, t_data data, int count)
 {
-	int		count;
 	int		gap;
 	int		step;
 
-	count = 1;
 	step = 0;
 	gap = get_gap(&(*a), data);
 	while (gap)
 	{
-//		printf("gap is %d when count is %d\n", gap, count);
-		//if (gap > list_size(*a) / 10 && ft_power(2, count) < list_size(*a))
-		//{
-			step += quick_sort(&(*a), &(*b), data, count);
-			count++;
-			gap = get_gap(&(*a), data);
-		//}
-//			insertion_sort();
+		step += quick_sort(&(*a), &(*b), data, count);
+		count++;
+		gap = get_gap(&(*a), data);
 	}
 	printf("number of steps == %d\n", step);
 	return (step);
@@ -148,30 +141,63 @@ int			mega_sort(int ac, char **av)
 {
 	t_list			*a;
 	t_list			*b;
+	t_list			*c;
+	t_list			*d;
 	t_data			data;
 	int				out;
+	int				gap;
+	int		quick;
+	int		insert;
+	int		count;
 
 	if (ac == 1)
 		return (0);
 	b = NULL;
+	c = NULL;
+	d = NULL;
+	out = 0;
+	count = 1;
 	a = list_arg(ac, av);
 	circle_list(a);
 	data.goal = make_goal(a);
 	data.size = ac - 1;
-	printf("longest row begins at %d\n", longest_row(&a, data)->nbr);
-	printf("gap is %d\n", get_gap(&a, data));
-	out = stack_sort(&a, &b, data);
-	print_list(a);
+	gap = get_gap(&a, data);
+	insert = 10000000;
+	while (gap)
+	{
+		b = copy_list(a);
+		c = copy_list(a);
+		quick = stack_sort(&b, &d, data, count);
+//		insert = insert_sort(&c, &d, data); LOOP INFINITE
+		if (insert < quick)
+			out += insert_sort(&a, &d, data);
+		else
+			out += quick_sort(&a, &d, data, count);
+		gap = get_gap(&a, data);
+		count++;
+	}
 	return (out);
 }
 
 int		main(int ac, char **av)
 {
 	int		quick;
-	int		thib;
+	int		merged;
+	int		insert;
+	t_list			*a;
+	t_list			*b;
+	t_data			data;
 
-	quick = mega_sort(ac, av);
-	thib = thibault(ac, av);
-	printf("%d is quick and %d is thib\n", quick, thib);
+	b = NULL;
+	a = list_arg(ac, av);
+	circle_list(a);
+	data.goal = make_goal(a);
+	data.size = ac - 1;
+
+	merged = mega_sort(ac, av);
+	insert = thibault(ac, av);
+	quick = stack_sort(&a, &b, data, 1);
+	printf("%d is quick and %d is insert and %d is merged\n", quick, insert, merged);
+
 	return (0);
 }

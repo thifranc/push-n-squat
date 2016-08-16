@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 14:08:34 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/15 23:15:01 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/16 10:41:19 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,37 +30,52 @@ int		pivot_move(t_list **a, t_list **b, int *goal, int pivot, int *count)
 	return (-1);
 }//do data.pivot += pivot_move;
 
-void		insert_sort(t_list **a, t_list **b, t_data data, int *count)
+int			insert_sort(t_list **a, t_list **b, t_data data)
 {
 	t_list	*cible;
+	int		count;
+	t_data	new;
 
+	new = count_gap(*a, data.goal, data.size);
+	data.gap = new.gap;
+	data.misplaced = new.misplaced;
+	data.pivot = get_pivot2(data.gap, data.misplaced, data.size);
+	count = 0;
 	while ((cible = get_cible(&(*a), NULL, data)) != NULL
 			|| (data.pivot != 0 && !is_full(*b, data.pivot)))
 	{
 		if (belongs_to(*a, data.goal, data.pivot) < 0)
 		{
-			put_in_head(&(*b), get_cible(&(*b), *a, data), count);
-			push(&(*a), &(*b), count);
+			put_in_head(&(*b), get_cible(&(*b), *a, data), &count);
+			push(&(*a), &(*b), &count);
 		}
 		else
 		{
 			if (cible && nearest2(&(*a), nearest_b(&(*a), data.goal, data.pivot), cible) < 0)
-				put_in_head(&(*a), nearest_b(&(*a), data.goal, data.pivot), count);
+				put_in_head(&(*a), nearest_b(&(*a), data.goal, data.pivot), &count);
 			else if (cible && nearest2(&(*a), nearest_b(&(*a), data.goal, data.pivot), cible) > 0)
 			{
 				put_in_head(&(*a), cible_updated(cible, get_value(&(*a),
-						data.goal[get_rank(data.goal, cible->nbr, data.size) + 1])), count);
-				swapp(&(*a), count);
+						data.goal[get_rank(data.goal, cible->nbr, data.size) + 1])), &count);
+				swapp(&(*a), &count);
 			}
 			else
 			{
 				if (!data.pivot || is_full(*b, data.pivot))
-					return ;//sais pas si possible de rentrer la dedans qd mm
+					return (count);//sais pas si possible de rentrer la dedans qd mm
 				else
-					data.pivot += pivot_move(&(*a), &(*b), data.goal, data.pivot, count);
+					data.pivot += pivot_move(&(*a), &(*b), data.goal, data.pivot, &count);
 			}
 		}
 	}
+	put_in_head(&(*a), list_min(&(*a)), &count);
+	if (list_max(&(*b)))
+	{
+		put_in_head(&(*b), list_max(&(*b)), &count);
+		while (*b)
+			push(&(*b), &(*a), &count);
+	}
+	return (count);
 }
 
 int			thibault(int ac, char **av)
@@ -68,7 +83,6 @@ int			thibault(int ac, char **av)
 	t_list			*a;
 	t_list			*b;
 	t_data			data;
-	t_data			new;
 	int				count;
 
 	count = 0;
@@ -80,22 +94,8 @@ int			thibault(int ac, char **av)
 	data.goal = make_goal(a);
 	data.size = ac - 1;
 
-	new = count_gap(a, data.goal, data.size);
-	data.gap = new.gap;
-	data.misplaced = new.misplaced;
-	data.pivot = get_pivot2(data.gap, data.misplaced, data.size);
 
-	insert_sort(&a, &b, data, &count);
+	count = insert_sort(&a, &b, data);
 
-	put_in_head(&a, list_min(&a), &count);
-	if (list_max(&b))
-	{
-		put_in_head(&b, list_max(&b), &count);
-		while (b)
-			push(&b, &a, &count);
-	}
-	print_list(a);
-	printf("%d == nb de coups to solve this\n", count);
-	dellist(&a);
 	return (count);
 }
