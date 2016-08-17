@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 14:08:34 by thifranc          #+#    #+#             */
-/*   Updated: 2016/08/16 11:35:45 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/08/17 11:23:50 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,13 +162,12 @@ int			mega_sort(int ac, char **av)
 	data.goal = make_goal(a);
 	data.size = ac - 1;
 	gap = get_gap(&a, data);
-	insert = 10000000;
 	while (gap)
-	{
+	{//passer ca en recursif
 		b = copy_list(a);
 		c = copy_list(a);
 		quick = stack_sort(&b, &d, data, count);
-//		insert = insert_sort(&c, &d, data); LOOP INFINITE
+		insert = insert_sort(&c, &d, data);
 		if (insert < quick)
 			out += insert_sort(&a, &d, data);
 		else
@@ -194,9 +193,9 @@ int		main(int ac, char **av)
 	data.goal = make_goal(a);
 	data.size = ac - 1;
 
-	merged = mega_sort(ac, av);
-	insert = thibault(ac, av);
 	quick = stack_sort(&a, &b, data, 1);
+	insert = thibault(ac, av);
+	merged = mega_sort(ac, av);
 	printf("%d is quick and %d is insert and %d is merged\n", quick, insert, merged);
 
 	return (0);
